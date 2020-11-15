@@ -1,0 +1,28 @@
+.filterable-product-table-container {
+  padding: .3em;
+}
+
+.searchbar {
+  padding: inherit;
+  background: lightgreen;
+}
+
+.product-table {
+  padding: inherit;
+  background: khaki;
+}
+
+.product-table {
+  padding: inherit;
+  background: lightblue;
+}
+
+.product-category-row{
+  padding: inherit;
+  background: lightcoral;
+}
+
+.product {
+  padding: inherit;
+  background: wheat;
+}
