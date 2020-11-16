@@ -30,36 +30,49 @@ function ProductTable(props) {
   );
 }
 
-function SearchBar(props) {
-  return (
-    <fieldset>
-      <legend>Search Product</legend>
-      <div>
-        <input className="searchbar" type="text" placeholder="search for puducts" value={props.filtertext}/>
-      </div>
-      <div>
-        <input type="checkbox" name="checkbox" />
-        <label for="checkbox">Only show products in stock</label>
-      </div>
-    </fieldset>
-  )
+class SearchBar extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <fieldset>
+        <legend>Search Product</legend>
+        <div>
+          <input className="searchbar" type="text" placeholder="search for puducts" onChange={this.props.onChange} />
+        </div>
+        <div>
+          <input type="checkbox" name="checkbox" />
+          <label htmlFor="checkbox">Only show products in stock</label>
+        </div>
+      </fieldset>
+    )
+  }
 }
 
 export default class FilterableProductTalbe extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterText: "ball",
+      filterText: "",
       inStockOnly: false,
     }
+
+    this.handleChange = this.handleChange.bind(this);
   }
 
+  handleChange(e) {
+    this.setState({
+      filterText: e.target.value,
+    });
+  }
 
   render() {
     return (
       <div className="filterable-product-table-container">
-        <SearchBar filtertext={this.state.filterText} instockonly={this.state.inStockOnly} />
-        <ProductTable filtertext={this.state.filterText} instockonly={this.state.inStockOnly} />
+        <SearchBar onChange={(e) => this.handleChange(e)} />
+        <ProductTable />
       </div>
     );
   }
