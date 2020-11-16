@@ -32,7 +32,16 @@ function ProductTable(props) {
 
 function SearchBar(props) {
   return (
-      <input className="searchbar" type="text" placeholder="search for puducts" />
+    <fieldset>
+      <legend>Search Product</legend>
+      <div>
+        <input className="searchbar" type="text" placeholder="search for puducts" />
+      </div>
+      <div>
+        <input type="checkbox" name="checkbox"/>
+        <label for="checkbox">Only show products in stock</label>
+      </div>
+    </fieldset>
   )
 }
 
