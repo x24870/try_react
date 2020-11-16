@@ -35,10 +35,10 @@ function SearchBar(props) {
     <fieldset>
       <legend>Search Product</legend>
       <div>
-        <input className="searchbar" type="text" placeholder="search for puducts" />
+        <input className="searchbar" type="text" placeholder="search for puducts" value={props.filtertext}/>
       </div>
       <div>
-        <input type="checkbox" name="checkbox"/>
+        <input type="checkbox" name="checkbox" />
         <label for="checkbox">Only show products in stock</label>
       </div>
     </fieldset>
@@ -48,13 +48,18 @@ function SearchBar(props) {
 export default class FilterableProductTalbe extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      filterText: "ball",
+      inStockOnly: false,
+    }
   }
+
 
   render() {
     return (
       <div className="filterable-product-table-container">
-        <SearchBar />
-        <ProductTable />
+        <SearchBar filtertext={this.state.filterText} instockonly={this.state.inStockOnly} />
+        <ProductTable filtertext={this.state.filterText} instockonly={this.state.inStockOnly} />
       </div>
     );
   }
