@@ -78,6 +78,20 @@ function ProductTable(props) {
 }
 
 class SearchBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.handleInStockChange = this.handleInStockChange.bind(this);
+    this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+  }
+
+  handleInStockChange(e){
+    this.props.onInStockChange(e.target.checked);
+  }
+
+  handleFilterTextChange(e){
+    this.props.onFilterTextChange(e.target.value)
+  }
+
   render() {
     const filterText = this.props.filterText;
     const inStockOnly = this.props.inStockOnly;
@@ -91,7 +105,7 @@ class SearchBar extends React.Component {
             type="text"
             placeholder="search for puducts"
             value={filterText}
-            onChange={this.props.onFilterTextChange}
+            onChange={this.handleFilterTextChange}
           />
         </div>
         <div>
@@ -99,7 +113,7 @@ class SearchBar extends React.Component {
             type="checkbox"
             name="checkbox"
             checked={inStockOnly}
-            onChange={this.props.onInStockChange}
+            onChange={this.handleInStockChange}
           />
           <label htmlFor="checkbox">Only show products in stock</label>
         </div>
@@ -132,15 +146,15 @@ export default class FilterableProductTalbe extends React.Component {
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
   }
 
-  handleInStockChange(e){
+  handleInStockChange(inStockOnly){
     this.setState({
-      inStockOnly: !this.state.inStockOnly
+      inStockOnly: inStockOnly
     });
   }
 
-  handleFilterTextChange(e){
+  handleFilterTextChange(filterText){
     this.setState({
-      filterText: e.target.value
+      filterText: filterText
     });
   }
 
@@ -150,8 +164,8 @@ export default class FilterableProductTalbe extends React.Component {
         <SearchBar
           filterText={this.state.filterText}
           inStockOnly={this.state.inStockOnly}
-          onInStockChange={(e)=>this.handleInStockChange(e)}
-          onFilterTextChange={(e)=>this.handleFilterTextChange(e)}
+          onInStockChange={this.handleInStockChange}
+          onFilterTextChange={this.handleFilterTextChange}
         />
         <ProductTable
           products={this.state.products}
